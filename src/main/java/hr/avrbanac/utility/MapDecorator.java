@@ -27,6 +27,12 @@ public class MapDecorator {
         converters.put(List.class, new ListConverter());
     }
 
+    /**
+     * Add custom converter if needed. This method is not synchronized by design. Intended usage is in bootstrap phase, no need to interlock
+     * this method with {@link #convert(Object, Class)}. This would impact performance.
+     * @param clazz custom converter return class
+     * @param converter custom converter should implement {@link Converter}
+     */
     public void addConverter(
             final Class<?> clazz,
             final Converter<?> converter) {
@@ -92,6 +98,10 @@ public class MapDecorator {
         }
     }
 
+    public Builder extractBuilder() {
+        return new Builder();
+    }
+
     private Map<?, ?> getNodeFromList(
             final Map<?, ?> map,
             final String dotToken) {
@@ -116,5 +126,38 @@ public class MapDecorator {
         return null;
     }
 
+    /**
+     * This is not thread safe! Each thread should use its own builder.
+     */
+    public class Builder {
+        private Map<String, Object> source;
 
+        private Builder() {}
+
+        public Builder from(final Map<String, Object> newSource) {
+            source = newSource;
+            return this;
+        }
+
+        @SuppressWarnings("unchecked")
+        public Builder mapNode(final String pathToken) {
+            if (source == null) {
+                return null;
+            }
+
+            source = convert(source.get(pathToken), Map.class);
+            return this;
+        }
+
+        public <T> T value(
+                final String endPathToken,
+                final Class<T> clazz) {
+
+            if (source == null) {
+                return null;
+            }
+
+            return convert(source.get(endPathToken), clazz);
+        }
+    }
 }

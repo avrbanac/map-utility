@@ -1,7 +1,6 @@
 package hr.avrbanac.utility.converters;
 
 import hr.avrbanac.utility.Converter;
-import hr.avrbanac.utility.Utility;
 
 public class ShortConverter implements Converter<Short> {
 
