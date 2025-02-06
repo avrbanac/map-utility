@@ -15,17 +15,17 @@ public class MapDecorator {
     private static final Map<Class<?>, Converter<?>> converters = new HashMap<>();
 
     MapDecorator() {
-        converters.put(Boolean.class, new BooleanConverter());
+        converters.put(Boolean.class,   new BooleanConverter());
         converters.put(Character.class, new CharacterConverter());
-        converters.put(Byte.class, new ByteConverter());
-        converters.put(Short.class, new ShortConverter());
-        converters.put(Integer.class, new IntegerConverter());
-        converters.put(Long.class, new LongConverter());
-        converters.put(Float.class, new FloatConverter());
-        converters.put(Double.class, new DoubleConverter());
-        converters.put(String.class, new StringConverter());
-        converters.put(Map.class, new MapConverter());
-        converters.put(List.class, new ListConverter());
+        converters.put(Byte.class,      new ByteConverter());
+        converters.put(Short.class,     new ShortConverter());
+        converters.put(Integer.class,   new IntegerConverter());
+        converters.put(Long.class,      new LongConverter());
+        converters.put(Float.class,     new FloatConverter());
+        converters.put(Double.class,    new DoubleConverter());
+        converters.put(String.class,    new StringConverter());
+        converters.put(Map.class,       new MapConverter());
+        converters.put(List.class,      new ListConverter());
     }
 
     /**
