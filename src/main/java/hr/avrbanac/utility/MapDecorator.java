@@ -139,7 +139,7 @@ public class MapDecorator {
         return new Builder();
     }
 
-    private Map<?, ?> getNodeFromList(
+    private Object getNodeFromList(
             final Map<?, ?> map,
             final String dotToken) {
 
@@ -150,9 +150,9 @@ public class MapDecorator {
                 try {
                     int index = Integer.parseInt(keyWithIndex[1]);
                     if (index < list.size() && index >= 0) {
-                        return (Map<?, ?>) list.get(index);
+                        return list.get(index);
                     } else if (index < 0 && index >= -list.size()) {
-                        return (Map<?, ?>) list.get(list.size() + index);
+                        return list.get(list.size() + index);
                     }
                 } catch (NumberFormatException e) {
                     LOG.warn("Index conversion failed or index out of bounds: [index: {}, size: {}].",
